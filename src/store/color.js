@@ -12,11 +12,19 @@ const useColorStore = create((set) => ({
     set(produce((state) => {
         state.colors = axiosData.data;
     }))
-  }
+  },
+  addColor: async (newColor) => {
+    const { data } = await axios.post(`https://reqres.in/api/colors`, newColor);
+    
+    set(produce((state) => {
+        state.colors = [...state.colors, data];
+    }))
+  },
 }));
 
 // selector bisa dibuat di sini, biar bisa reusesable
 export const selectColors = (state) => state.colors;
 export const selectFetchColors = (state) => state.fetchColors;
+export const selectAddColor = (state) => state.addColor;
 
 export default useColorStore;
