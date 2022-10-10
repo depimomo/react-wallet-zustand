@@ -8,7 +8,9 @@ const ColorList = () => {
   const fetchColors = useColorStore(selectFetchColors);
 
   useEffect(() => {
-    fetchColors();
+    if (colors.length == 0) {
+      fetchColors();
+    }
   }, []);
 
   return (
