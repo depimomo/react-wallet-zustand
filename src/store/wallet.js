@@ -18,8 +18,8 @@ const useWalletStore = create((set) => ({
         state.balance = state.balance - amount;
       }
     })),
-  fetchUser: async () => {
-    const { data: axiosData } = await axios.get('https://reqres.in/api/users/1');
+  fetchUser: async (id) => {
+    const { data: axiosData } = await axios.get(`https://reqres.in/api/users/${id}`);
     
     set(produce((state) => {
         state.user = axiosData.data;
