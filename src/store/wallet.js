@@ -1,3 +1,4 @@
+import axios from 'axios';
 import produce from 'immer';
 import create from 'zustand';
 
@@ -17,6 +18,13 @@ const useWalletStore = create((set) => ({
         state.balance = state.balance - amount;
       }
     })),
+  fetchUser: async () => {
+    const { data: axiosData } = await axios.get('https://reqres.in/api/users/1');
+    
+    set(produce((state) => {
+        state.user = axiosData.data;
+    }))
+  }
 }));
 
 // selector bisa dibuat di sini, biar bisa reusesable
@@ -24,5 +32,6 @@ export const selectBalance = (state) => state.balance;
 export const selectUser = (state) => state.user;
 export const selectOnDeposit = (state) => state.onDeposit;
 export const selectOnWithdraw = (state) => state.onWithdraw;
+export const selectFetchUser = (state) => state.fetchUser;
 
 export default useWalletStore;
