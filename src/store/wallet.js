@@ -6,12 +6,12 @@ const initialBalance = 100000;
 const useWalletStore = create((set) => ({
   user: initialUser,
   balance: initialBalance,
-  onDeposit: () => set((state) => {
-    return { ...state, balance: state.balance + 10000 }
+  onDeposit: (amount) => set((state) => {
+    return { ...state, balance: state.balance + amount }
   }),
-  onWithdraw: () => set((state) => {
-    if (state.balance >= 10000) {
-      return { ...state, balance: state.balance - 10000 };
+  onWithdraw: (amount) => set((state) => {
+    if (state.balance >= amount) {
+      return { ...state, balance: state.balance - amount };
     }
     return state;
   }),
